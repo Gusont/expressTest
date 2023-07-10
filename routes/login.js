@@ -52,7 +52,7 @@ router.post('/register', async (req, res) => {
     console.log('hashedPassword---',hashedPassword)
     // // 创建新用户
     const user = new User({ username, password: hashedPassword});
-    // console.log('222---',user.password,user.username);
+    console.log('222---',user.password,user.username);
     await user.save();
 
     res.status(201).json({ message: 'User registered successfully' });
