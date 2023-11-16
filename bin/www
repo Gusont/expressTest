@@ -5,6 +5,7 @@
  */
 
 var app = require('../app');
+var idx = require('../index');
 var debug = require('debug')('expresstest:server');
 var http = require('http');
 const schedule = require('node-schedule');
@@ -13,9 +14,10 @@ const schedule = require('node-schedule');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8080');
+var port = normalizePort(process.env.PORT || '8088');
 app.set('port', port);
 
+idx.use;
 /**
  * Create HTTP server.
  */
@@ -107,7 +109,7 @@ function scheduleJobStart() {
   // });
   // 取消任务
   // job.cancel(); 
-  const job = schedule.scheduleJob('*/3 * * * *', function(){
+  const job = schedule.scheduleJob('*/1 * * * *', function(){
     // do some
     try {
       httpGet();

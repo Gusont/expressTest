@@ -9,16 +9,29 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 
 var app = express();
+console.log('a---pp.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//app.use() 注册全局中间件
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/routes', express.static(path.join(__dirname, 'routes')));
+app.use(express.static(path.join(__dirname, 'routes')));
+app.use(express.static(path.join(__dirname, 'public/stylesheets')));
+
+
+const rt = function (req, res, next) {
+  console.log('路由中间件 函数');
+  next();
+};
+
+app.use(rt);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -40,4 +53,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = app
